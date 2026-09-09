@@ -1,0 +1,1 @@
+Generate slides on how to carry out Practical Professional Software Testing and Evaluation based on global best practices in developing security-first state-of-the-art enterprise-grade software. Do a thorough research. Ensure that the text size is appropriately occupying given spaces - not too tiny!

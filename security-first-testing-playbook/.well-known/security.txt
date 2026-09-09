@@ -1,0 +1,8 @@
+# Machine-readable disclosure contact, RFC 9116 shape.
+# Slide 37: publish a disclosure policy before opening a bounty.
+
+Contact: https://github.com/etemigarba/security-first-testing-playbook/security/advisories/new
+Expires: 2027-09-07T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://github.com/etemigarba/security-first-testing-playbook/blob/main/.well-known/security.txt
+Policy: https://github.com/etemigarba/security-first-testing-playbook/blob/main/SECURITY.md

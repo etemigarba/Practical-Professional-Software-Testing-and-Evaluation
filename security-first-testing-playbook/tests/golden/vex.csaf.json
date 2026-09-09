@@ -1,0 +1,30 @@
+{
+  "document": {
+    "category": "csaf_vex",
+    "csaf_version": "2.0",
+    "title": "VEX for security-first-testing-playbook 1.0.0",
+    "publisher": { "category": "vendor", "name": "Prof. Etemi Joshua Garba" },
+    "tracking": { "id": "STP-VEX-2026-0001", "version": "1", "status": "final" }
+  },
+  "vulnerabilities": [
+    {
+      "cve": "CVE-2026-0004",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "product_status": {
+        "not_affected": ["security-first-testing-playbook@1.0.0"]
+      }
+    },
+    {
+      "cve": "CVE-2026-0002",
+      "product_status": {
+        "affected": ["security-first-testing-playbook@1.0.0"]
+      }
+    },
+    {
+      "cve": "CVE-2026-0009",
+      "product_status": {
+        "not_affected": ["security-first-testing-playbook@1.0.0"]
+      }
+    }
+  ]
+}

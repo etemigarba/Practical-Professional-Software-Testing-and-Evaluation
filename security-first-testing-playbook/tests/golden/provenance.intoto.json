@@ -1,0 +1,29 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+    {
+      "name": "security_first_testing_playbook-1.0.0-py3-none-any.whl",
+      "digest": {
+        "sha256": "24f0e9a7078e3c3df2ae834f258581dc9206c60b39ce54d12bdf8d34af64ee7f"
+      }
+    }
+  ],
+  "predicateType": "https://slsa.dev/provenance/v1",
+  "predicate": {
+    "buildDefinition": {
+      "buildType": "https://slsa.dev/container-based-build/v0.1",
+      "externalParameters": {
+        "source": "git+https://github.com/etemigarba/security-first-testing-playbook@refs/tags/v1.0.0"
+      }
+    },
+    "runDetails": {
+      "builder": {
+        "id": "https://github.com/actions/runner/github-hosted"
+      },
+      "metadata": {
+        "invocationId": "run-2026-09-07-0001",
+        "startedOn": "2026-09-07T09:00:00Z"
+      }
+    }
+  }
+}

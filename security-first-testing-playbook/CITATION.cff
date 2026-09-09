@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+title: "Security-First Testing Playbook"
+message: "If you use this repository, please cite it as below."
+type: software
+authors:
+  - family-names: Garba
+    given-names: "Etemi Joshua"
+    name-prefix: Prof.
+    city: Abuja
+    country: NG
+version: 1.0.0
+date-released: 2026-09-07
+license: MIT
+repository-code: "https://github.com/etemigarba/security-first-testing-playbook"
+abstract: >-
+  Runnable companion to the 56-slide course deck "Software Testing & Evaluation:
+  A Security-First Playbook". Implements the deck's techniques as tested,
+  dependency-free Python: property-based and mutation testing, authorisation
+  matrix tests, risk-based vulnerability triage, SBOM/VEX/provenance
+  verification, and an auditor that detects assertion-free tests.
+keywords:
+  - software testing
+  - security testing
+  - OWASP
+  - NIST SSDF
+  - supply chain
+  - software engineering education

@@ -1,0 +1,99 @@
+[build-system]
+requires = ["setuptools>=77.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "security-first-testing-playbook"
+version = "1.0.0"
+description = "Runnable companion to the Software Testing & Evaluation security-first playbook: OWASP, NIST SSDF, ISO/IEC 25010 and SLSA practice as executable, tested code."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Prof. Etemi Joshua Garba" }]
+maintainers = [{ name = "Prof. Etemi Joshua Garba" }]
+keywords = [
+    "software-testing", "security-testing", "owasp", "asvs", "nist-ssdf",
+    "supply-chain", "sbom", "slsa", "vex", "property-based-testing",
+    "mutation-testing", "devsecops", "test-automation", "education",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Security",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "hypothesis>=6.100",
+    "pytest-cov>=5.0",
+    "ruff>=0.6",
+    "mypy>=1.11",
+]
+postgres = ["testcontainers[postgres]>=4.8", "psycopg[binary]>=3.2"]
+fuzz = ["atheris>=2.3; python_version < '3.13'"]
+mutation = ["mutmut>=3.0"]
+sbom = ["cyclonedx-bom>=4.6"]
+
+[project.urls]
+Homepage = "https://github.com/etemigarba/security-first-testing-playbook"
+Documentation = "https://github.com/etemigarba/security-first-testing-playbook/wiki"
+Source = "https://github.com/etemigarba/security-first-testing-playbook"
+Issues = "https://github.com/etemigarba/security-first-testing-playbook/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+stplaybook = ["py.typed"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = "-ra --strict-markers --strict-config"
+markers = [
+    "postgres: requires STP_USE_POSTGRES=1 and a container runtime",
+    "fuzz: requires STP_ENABLE_FUZZ=1 and the atheris extra",
+    "slow: excluded from the pull-request gate",
+]
+filterwarnings = ["error"]
+
+[tool.coverage.run]
+branch = true
+source = ["stplaybook"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+exclude_lines = ["pragma: no cover", "if TYPE_CHECKING:", "raise NotImplementedError"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM", "RUF", "S", "PT", "ARG", "PTH"]
+# S101 — `assert` is the assertion mechanism in a testing repository.
+# N818 — exception names follow the deck verbatim (DailyLimitExceeded,
+#        TenantMismatch, InvalidStatement).  Appending "Error" to each would
+#        break slide fidelity for no readability gain; see docs/slide-to-code-map.md.
+ignore = ["S101", "N818"]
+
+[tool.ruff.lint.per-file-ignores]
+# S311 — `random` seeds synthetic fixtures for determinism, never for secrets.
+"tests/**" = ["ARG001", "ARG002", "S105", "S106", "S311"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src"]
+strict = true
+warn_unreachable = true
+disallow_any_generics = true

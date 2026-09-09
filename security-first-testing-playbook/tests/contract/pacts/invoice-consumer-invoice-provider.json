@@ -1,0 +1,46 @@
+{
+  "consumer": { "name": "invoice-consumer" },
+  "provider": { "name": "invoice-provider" },
+  "interactions": [
+    {
+      "description": "a request for an invoice the caller owns",
+      "providerState": "invoice 7c2 exists for tenant-a",
+      "request": {
+        "method": "GET",
+        "path": "/invoices/{invoiceId}",
+        "principal": "owner"
+      },
+      "response": {
+        "status": 200,
+        "matchingRules": {
+          "$.body.id": { "match": "regex", "regex": "^[0-9a-f-]{36}$" },
+          "$.body.total": { "match": "type", "type": "integer" },
+          "$.body.currency": { "match": "regex", "regex": "NGN|USD" },
+          "$.body.status": { "match": "regex", "regex": "AWAITING_APPROVAL|PAID|DRAFT" }
+        },
+        "forbiddenFields": ["tenant", "tenantId", "internalNotes"]
+      }
+    },
+    {
+      "description": "a request for an invoice belonging to another tenant",
+      "providerState": "invoice 7c2 exists for tenant-a",
+      "request": {
+        "method": "GET",
+        "path": "/invoices/{invoiceId}",
+        "principal": "other_tenant_admin"
+      },
+      "response": { "status": 404, "body": null }
+    },
+    {
+      "description": "an unauthenticated request",
+      "providerState": "invoice 7c2 exists for tenant-a",
+      "request": {
+        "method": "GET",
+        "path": "/invoices/{invoiceId}",
+        "principal": "anonymous"
+      },
+      "response": { "status": 401, "body": null }
+    }
+  ],
+  "metadata": { "pactSpecification": { "version": "3.0.0" } }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "stplaybook-js-examples",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Optional JavaScript examples: Pact v3 contract test, Playwright end-to-end spec, k6 performance script. Not required to install, lint, type-check or test the Python package.",
+  "license": "MIT",
+  "engines": { "node": ">=20.11" },
+  "scripts": {
+    "syntax-check": "node --check contract/consumer.pact.mjs && node --check e2e/transfer.spec.mjs && node --check perf/transfer-slo.mjs",
+    "test:contract": "pact-broker-free vitest run contract",
+    "test:e2e": "playwright test e2e",
+    "test:perf": "k6 run perf/transfer-slo.mjs"
+  },
+  "devDependencies": {
+    "@pact-foundation/pact": "^13.2.0",
+    "@playwright/test": "^1.48.0",
+    "vitest": "^2.1.0"
+  }
+}
